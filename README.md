@@ -3,7 +3,7 @@ This Excel workbook is a Document Management System. When run, it parses the roo
 
 
 # Getting Started
-[Download](/releases) the workbook to your computer.
+[Download](./releases) the workbook to your computer.
 
 
 # How to Use the Utility

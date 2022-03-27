@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example Webpage</title>
+    <style type="text/css">
+        :root { --page-background-color: #ebebeb;
+                --navbar-background-color: #333;
+                --navbar-font-color: white;
+                --navbar-hover-background-color: red;
+                --navbar-hover-font-color: white;
+                --folder-background-color: #d6d6d6;
+                --file-background-color: #3F3F3F;
+        }
+        * { box-sizing: border-box; margin: 0px; padding: 0px; background-color: var(--page-background-color); }
+        body { min-width: 300px; }
+        nav {  background-color: var(--navbar-background-color); top: 0; width: 100%; display: flex; align-items: center; flex-wrap: wrap; min-width: 300px; }
+        nav a { float: left; font-family: Helvetica; font-size: 16px; text-align: center; padding: 14px 16px; text-decoration: none; height: 100%; }
+        .dropdown { float: left; overflow:hidden; position: static; }
+        .dropdown .dropbtn { font-size: 16px; border: none; outline: none; color: var(--navbar-font-color); padding: 14px 16px; background-color: var(--navbar-background-color); font-family: Helvetica }
+        nav a:hover, .dropdown:hover .dropbtn, .dropdown-content a:hover { background-color: var(--navbar-hover-background-color); color: var(--navbar-hover-font-color);}
+        .dropdown-content { display: none; position: absolute; min-width: 160px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; overflow: auto; max-height: 50vh; }
+        .dropdown-content a, .dropdown-content a { float: none; color: black; padding: 12px 16px; font-family: Helvetica; text-decoration: none; display: block; text-align: left; }
+        .dropdown:hover .dropdown-content { display: block; }
+        #searchBar { min-width: 50%; font-family: times; font-size: 16px; text-align: left; padding: 14px 16px; text-decoration: none; flex-grow: 1;}
+        main { color:black; margin-top: 80px; padding: 1rem; overflow-wrap: break-word; }
+        h1 { font-size: 3rem;}
+        h2 { padding-top: 10px; display: block; background-color: var(--folder-background-color); font-size: 1.2rem; border-bottom: 1px solid; border-color: #3F3F3F; }
+        .library-folder { margin: 0px 0px 10px 10px; }
+        h3 { border-bottom: 1px solid; border-color: var(--file-background-color); padding: 0.2rem 0 0.2rem 0; font-size: 1rem; margin-left: 16px;}
+        h3:hover { background-color: var(--folder-background-color); }
+        h3 a { background-color: transparent; }
+        .library-folder, h3 { max-width: 50vw; min-width: 400px; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div style="position: fixed; top: 0px; width: 100%;">
+    <nav>
+        <div class="dropdown">
+            <button class="dropbtn">Tags</button>
+            <div class="dropdown-content">
+                <div style="float: left;">
+                    <a href="#" onClick="showTaggedReferencesOnly('docs', 'Docs')">Docs</a>
+                    <a href="#" onClick="showTaggedReferencesOnly('sample', 'Sample')">Sample</a>
+                    <a href="#" onClick="showTaggedReferencesOnly('webpages', 'Webpages')">Webpages</a>
+                </div>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="showAllReferences()">Show All</button>
+        </div>
+        <input type="text" id="searchBar" onkeyup="filterRecords()" placeholder="Search for reference...">
+    </nav>
+    </div>
+    <main>
+        <h1>Example Webpage<span id="pageTitleTag"></span></h1>
+            <h3 data-Sample=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\_Sample File A.txt">_Sample File A.txt</a></h3>
+            <h3 data-Sample=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Sample File 1.txt">Sample File 1.txt</a></h3>
+            <h3 data-Sample=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Sample File 2.txt">Sample File 2.txt</a></h3>
+            <h3 data-Sample=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Sample File 3.txt">Sample File 3.txt</a></h3>
+        <div class="library-folder">
+            <h2 id="h2-_My Personal Documents">_My Personal Documents</h2>
+                <h3 data-Docs=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\_My Personal Documents\Document 1.txt">Document 1.txt</a></h3>
+                <h3 data-Docs=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\_My Personal Documents\Document 2.txt">Document 2.txt</a></h3>
+                <h3 data-Docs=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\_My Personal Documents\Document 3.txt">Document 3.txt</a></h3>
+            <div class="library-folder">
+                <h2 id="h2-Test">Test</h2>
+                <div class="library-folder">
+                    <h2 id="h2-Test 2">Test 2</h2>
+                        <h3 data-Docs=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\_My Personal Documents\Test\Test 2\New Text Document.txt">New Text Document.txt</a></h3>
+                </div>
+            </div>
+        </div>
+        <div class="library-folder">
+            <h2 id="h2-Contacts">Contacts</h2>
+                <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Contacts\_My Old Phone.txt">_My Old Phone.txt</a></h3>
+                <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Contacts\My Phone.txt">My Phone.txt</a></h3>
+            <div class="library-folder">
+                <h2 id="h2-_Emergency Contacts">_Emergency Contacts</h2>
+                    <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Contacts\_Emergency Contacts\Father.txt">Father.txt</a></h3>
+                    <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Contacts\_Emergency Contacts\Mother.txt">Mother.txt</a></h3>
+                    <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Contacts\_Emergency Contacts\Sibling.txt">Sibling.txt</a></h3>
+                    <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Contacts\_Emergency Contacts\Spouse.txt">Spouse.txt</a></h3>
+            </div>
+            <div class="library-folder">
+                <h2 id="h2-_Personal Contacts">_Personal Contacts</h2>
+                    <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Contacts\_Personal Contacts\Contact 1.txt">Contact 1.txt</a></h3>
+                    <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Contacts\_Personal Contacts\Contact 2.txt">Contact 2.txt</a></h3>
+                    <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Contacts\_Personal Contacts\Contact 3.txt">Contact 3.txt</a></h3>
+            </div>
+            <div class="library-folder">
+                <h2 id="h2-Business Contacts">Business Contacts</h2>
+                    <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Contacts\Business Contacts\_Contact 1A.txt">_Contact 1A.txt</a></h3>
+                    <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Contacts\Business Contacts\_Contact 2A.txt">_Contact 2A.txt</a></h3>
+                    <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Contacts\Business Contacts\Contact 1.txt">Contact 1.txt</a></h3>
+                    <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Contacts\Business Contacts\Contact 2.txt">Contact 2.txt</a></h3>
+                    <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Contacts\Business Contacts\Contact 3.txt">Contact 3.txt</a></h3>
+                    <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Contacts\Business Contacts\Contact 4.txt">Contact 4.txt</a></h3>
+                    <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Contacts\Business Contacts\Contact 5.txt">Contact 5.txt</a></h3>
+                    <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Contacts\Business Contacts\Contact 6.txt">Contact 6.txt</a></h3>
+                    <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Contacts\Business Contacts\Contact 7.txt">Contact 7.txt</a></h3>
+            </div>
+        </div>
+        <div class="library-folder">
+            <h2 id="h2-Documents">Documents</h2>
+                <h3 data-Docs=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Documents\Document 1.txt">Document 1.txt</a></h3>
+                <h3 data-Docs=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Documents\Document 2.txt">Document 2.txt</a></h3>
+                <h3 data-Docs=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Documents\Document 3.txt">Document 3.txt</a></h3>
+                <h3 data-Docs=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Documents\Document 4.txt">Document 4.txt</a></h3>
+                <h3 data-Docs=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Documents\Document 5.txt">Document 5.txt</a></h3>
+                <h3 data-Docs=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Documents\Document 6.txt">Document 6.txt</a></h3>
+        </div>
+        <div class="library-folder">
+            <h2 id="h2-My Publications">My Publications</h2>
+                <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\My Publications\Publication 1.txt">Publication 1.txt</a></h3>
+                <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\My Publications\Publication 2.txt">Publication 2.txt</a></h3>
+                <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\My Publications\Publication 3.txt">Publication 3.txt</a></h3>
+                <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\My Publications\Publication 4.txt">Publication 4.txt</a></h3>
+                <h3><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\My Publications\Publication 5.txt">Publication 5.txt</a></h3>
+        </div>
+        <div class="library-folder">
+            <h2 id="h2-Pictures">Pictures</h2>
+                <h3 data-Docs=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Pictures\New Text Document.txt">New Text Document.txt</a></h3>
+            <div class="library-folder">
+                <h2 id="h2-Empty Folder">Empty Folder</h2>
+            </div>
+        </div>
+        <div class="library-folder">
+            <h2 id="h2-Website">Website</h2>
+                <h3 data-Webpages=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Website\checkout.css">checkout.css</a></h3>
+                <h3 data-Webpages=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Website\checkout.html">checkout.html</a></h3>
+                <h3 data-Webpages=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Website\index.css">index.css</a></h3>
+                <h3 data-Webpages=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Website\index.html">index.html</a></h3>
+                <h3 data-Webpages=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Website\index.js">index.js</a></h3>
+                <h3 data-Webpages=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Website\index2.html">index2.html</a></h3>
+                <h3 data-Webpages=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Website\main.css">main.css</a></h3>
+                <h3 data-Webpages=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Website\script1.js">script1.js</a></h3>
+                <h3 data-Webpages=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Website\shopping.html">shopping.html</a></h3>
+                <h3 data-Webpages=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Website\testing.js">testing.js</a></h3>
+                <h3 data-Webpages=""><a href= "C:\Users\mslas\Google Drive\LMD\Excel-File-Cataloger\Sample Data Set\Website\variables.css">variables.css</a></h3>
+        </div>
+        <footer style="margin-top: 30px;">This webpage was last rebuilt on 3/27/2022. To request changes, <a href="mailto:admin@domain.com?subject=Update Request for Example Webpage"> contact the administrator</a>.</footer>
+    </main>
+    <script>
+        const libraryList = document.querySelector('main').querySelectorAll('.library-folder')
+        const pageTitleTag = document.getElementById('pageTitleTag')
+        const recordList = document.querySelector('main').querySelectorAll(`h3`)
+        let currentTag = null
+        hideEmptyFolders()
+        function filterRecords() {
+            let filter = document.getElementById('searchBar').value.toUpperCase();
+            recordList.forEach(record => {
+                if (currentTag ? (record.hasAttribute(`data-${currentTag}`)) && record.querySelector('a').text.toUpperCase().indexOf(filter) > -1 : record.querySelector('a').text.toUpperCase().indexOf(filter) > -1) {
+                    record.classList.remove('hidden')
+                } else {
+                    record.classList.add('hidden')
+                }
+            })
+            hideEmptyFolders()
+        }
+        function hideEmptyFolders() {
+            let visibleCount = 0
+            libraryList.forEach(folder => {
+                visibleCount = 0
+                folder.querySelectorAll('h3').forEach(record => {
+                    if (!record.classList.contains('hidden')) {visibleCount++}
+                })
+                if (visibleCount === 0) {
+                    folder.classList.add('hidden')
+                } else {
+                    folder.classList.remove('hidden')
+                }
+            })
+        }
+        function showAllReferences() {
+            document.getElementById('searchBar').value = ''
+            currentTag = null
+            pageTitleTag.innerText = ''
+            filterRecords()
+            window.scrollTo(0, 0)
+        }
+        function showTaggedReferencesOnly(tagCode, displayText) {
+            pageTitleTag.innerText = ` - ${displayText}`
+            currentTag = tagCode
+            filterRecords()
+        }
+    </script>
+</body>
+</html>
