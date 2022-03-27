@@ -3,7 +3,7 @@ This Excel workbook is a Document Management System. When run, it parses the roo
 
 
 # Getting Started
-[Download](/ExampleWorkbook.xlsm) **NOTE: UPDATE THIS LINK** the workbook to your computer.
+[Download](/releases) the workbook to your computer.
 
 
 # How to Use the Utility
@@ -11,9 +11,9 @@ After opening the workbook, press the `Instructions` button to review a self-con
 
 ## Configuring
 Press the `Settings` button to configure the utility.
-  - **Webpage Title**: Specifies both the `<title>` and `<h1>` elements in the page
-  - **Root Directory**: The system directory that the utility reads from
-  - **Webpage Output Location**: Folder the output webpage will save to. The output will have a filename of "[WebpageTitle].html" with capitalization maintained but any spaces removed.
+  - **Webpage Title**: Specifies both the `<title>` and `<h1>` elements in the page.
+  - **Root Directory**: The system directory that the utility reads from. Starting this value with ".\" tells the utility to use a relative file path to the workbook's current location. Example: `".\Sample Data Set"`.
+  - **Webpage Output Location**: Folder the output webpage will save to. The output will have a filename of "[WebpageTitle].html" with capitalization maintained but any spaces removed. This can also use the relative location operator.
   - **Administrator Email**: An email address used for an email quick link at the bottom of the output page. Can be set to any email address. If left blank, this utility omits this page element. There is no error checking for invalid email addresses on this setting.
   - **Omitted File/Folder Prefix**: The utility omits any file or folder beginning with this text prefix. This is useful for withholding files or folders from the utility in a working directory. For example, you can have file folders start with an underscore and set this value to `_`. Any files or folders (and all files within these folders) will not appear on the webpage.
 
@@ -27,7 +27,7 @@ Use the Tags table to organize tags and apply filters. The webpage displays the 
 
 Tag names must be unique. Any tags with a blank name are deleted while building the webpage. The webpage will not display tags with no filter specified.
 
-To apply more than one filter term to a tag, separate them with a comma. If the search term contains a comma, you can enclose it within double quotes.
+To apply more than one filter term to a tag, separate them with a comma. If the search term contains a comma, you can enclose it within double quotes. Tags are not case sensitive.
 
 Example Filter Strings:
 -  *America, United States, Mexico, Canada*
@@ -47,7 +47,7 @@ Press the "Show All" button to clear the search bar and tag selections.
 # Contributing and Outlook
 This resource has all intended functionality as of version 1.1. I consider it feature complete, but will continue to provide bug support.
 
-I will in no way turn away additional contributions or expansions if beneficial or needed in the future. All are welcome to open an issue or feature request. If you do want to contribute, here is more information about the utility's structure:
+I will in no way turn away additional contributions or expansions if beneficial or needed in the future. All are welcome to open an issue or feature request. If you decide to contribute, here is more information about the utility's structure:
 
 ## Directory Management
 To parse all the files and folders, this utility makes use of the [VBA Directory Manager](https://github.com/M-Scott-Lassiter/VBA-Directory-Manager) class.
