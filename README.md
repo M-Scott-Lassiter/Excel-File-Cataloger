@@ -35,15 +35,15 @@ Press the `Build Webpage` button. A prompt will ask for confirmation to rebuild 
 # How to Use the Webpage
 Use the search bar at the top of the page to type a string. The page will filter out all files that do not contain that text. It is not case sensitive. If a folder has no files that match, the page hides that folder.
 
-![Applying search filters](images/ApplySearchFilters.gif)
+![Applying search filters](./images/ApplySearchFilters.gif)
 
 Select a tag to show only those files that have already been identified as applicable to that group. Searching now only looks within those tagged files. Press the "Show All" button to clear the search bar and tag selections.
 
-![Applying search filters](images/ApplyTagsAndFilter.gif)
+![Applying search filters](./images/ApplyTagsAndFilter.gif)
 
 If using an omit prefix, the webpage will not have any of the omitted files present.
 
-![Applying search filters](images/ApplyingOmitPrefixes.gif)
+![Applying search filters](./images/ApplyingOmitPrefixes.gif)
 
 
 # Contributing and Outlook
