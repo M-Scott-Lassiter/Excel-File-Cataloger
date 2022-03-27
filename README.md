@@ -1,27 +1,22 @@
-# Excel-File-Cataloger
+# Excel File Cataloger
 This Excel workbook is a Document Management System. When run, it parses the root directory specified in Settings for all files and folders, then it builds an HTML webpage to display the data in a more user friendly searchable format than the Windows file explorer.
 
 
 # Getting Started
-[Download](./releases) the workbook to your computer.
+[Download the workbook](https://github.com/M-Scott-Lassiter/Excel-File-Cataloger/releases/download/v1.1.0/Excel.File.Cataloger.v1.1.0.xlsm) to your computer.
 
-
-# How to Use the Utility
 After opening the workbook, press the `Instructions` button to review a self-contained version of these instructions.
 
 ## Configuring
 Press the `Settings` button to configure the utility.
   - **Webpage Title**: Specifies both the `<title>` and `<h1>` elements in the page.
-  - **Root Directory**: The system directory that the utility reads from. Starting this value with ".\" tells the utility to use a relative file path to the workbook's current location. Example: `".\Sample Data Set"`.
-  - **Webpage Output Location**: Folder the output webpage will save to. The output will have a filename of "[WebpageTitle].html" with capitalization maintained but any spaces removed. This can also use the relative location operator.
+  - **Root Directory**: The system directory that the utility reads from. Starting this value with ".\" tells the utility to use a relative file path to the workbook's current location. Example: `.\Sample Data Set`.
+  - **Webpage Output Location**: Folder the output webpage will save to. The output will have a filename of `[WebpageTitle].html` with capitalization maintained but any spaces removed. This can also use the relative location operator.
   - **Administrator Email**: An email address used for an email quick link at the bottom of the output page. Can be set to any email address. If left blank, this utility omits this page element. There is no error checking for invalid email addresses on this setting.
   - **Omitted File/Folder Prefix**: The utility omits any file or folder beginning with this text prefix. This is useful for withholding files or folders from the utility in a working directory. For example, you can have file folders start with an underscore and set this value to `_`. Any files or folders (and all files within these folders) will not appear on the webpage.
 
-## Building the Webpage
-Press the `Build Webpage` button. A prompt will ask for confirmation to rebuild the webpage. The utility will overwrite the existing webpage of the same name (if it exists), but does not modify any other files or folders.
-
 ## Creating Tags
-Tags are pre-built search strings applied during the build process. Files can have multiple tags assigned. Selecting a tag from the webpage dropdown menu bar filters the page and leaves only those tagged files remaining. Any subsequent search then applies only within that tagged group.
+Tags optional are pre-built search strings applied during the build process. Files can have multiple tags assigned. Selecting a tag from the webpage dropdown menu bar filters the page and leaves only those tagged files remaining. Any subsequent search then applies only within that tagged group. If no tags are defined, then the webpage will omit this feature.
 
 Use the Tags table to organize tags and apply filters. The webpage displays the value from the "Tag Name" column in the drop down menu. The Filters column contains the search strings. When building the webpage, each of these strings are compared against the file name to determine applicability.
 
@@ -32,6 +27,9 @@ To apply more than one filter term to a tag, separate them with a comma. If the 
 Example Filter Strings:
 -  *America, United States, Mexico, Canada*
 -  *Gunsmoke, "The Good, The Bad, and the Ugly", High Noon*
+
+## Building the Webpage
+Press the `Build Webpage` button. A prompt will ask for confirmation to rebuild the webpage. The utility will overwrite the existing webpage of the same name (if it exists), but does not modify any other files or folders.
 
 
 # How to Use the Webpage
@@ -65,7 +63,7 @@ The settings are stored in a table on a sheet called `SettingsSheet`. This has v
 All HTML, CSS, and Javascript is self contained within a single file.
 
 ## Tags Table and Data Validation
-Tags are stored in a table on the WebpageBuilder sheet named "Tags". The "Tag Name" column has data validation applied to prevent duplicate entries. To make the data validation apply dynamically to the whole column, a named range called "TagNameList" is defined in the Name Manager.
+Tags are stored in a table on the WebpageBuilder sheet named "Tags". The "Tag Name" column has data validation applied to prevent duplicate entries. To make the data validation apply dynamically to the whole column, a named range called `TagNameList` is defined in the Name Manager.
 
 
 # License
