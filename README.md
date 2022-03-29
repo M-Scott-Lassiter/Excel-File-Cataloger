@@ -31,6 +31,7 @@ Example Filter Strings:
 ## Building the Webpage
 Press the `Build Webpage` button. A prompt will ask for confirmation to rebuild the webpage. The utility will overwrite the existing webpage of the same name (if it exists), but does not modify any other files or folders.
 
+The status bar at the bottom of the application will update with the name of the folder getting parsed. This helps for folders with excessive quantities of files and subfolders so you know the program is still building and hasn't frozen.
 
 # How to Use the Webpage
 Use the search bar at the top of the page to type a string. The page will filter out all files that do not contain that text. It is not case sensitive. If a folder has no files that match, the page hides that folder.
